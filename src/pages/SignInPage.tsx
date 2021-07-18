@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import {Button, Input} from "@material-ui/core";
+import {Button, Input, Typography} from "@material-ui/core";
 import GoogleIcon from "../icons/GoogleIcon";
 import FacebookIcon from "../icons/FacebookIcon";
 import {FormEvent} from "react";
+import {Link} from "react-router-dom";
+import StyledLink from "@material-ui/core/Link";
 
 const CenteredColumn = styled.div`
   width: 100%;
@@ -26,20 +28,31 @@ const SignInTable = styled.table`
 `
 
 const FormStyled = styled.form`
-  display:flex;
-  flex-direction:column;
-  
+  display: flex;
+  flex-direction: column;
+
 `
 
-const SignInButton = styled(Button)`
-  .MuiButton-startIcon {
-    align-self: flex-start;
+const BottomCentered = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+`
+
+const StyledButton = styled(Button)`
+  background-color: rgba(255, 255, 255, .5) !important;
+  margin:0.2em !important;
+  
+  &:hover{
+    background-color:rgba(255,255,255,.8) !important;
   }
 `
 
 const SignInPage = () => {
 
-    let onSubmit = (event:FormEvent) => {
+    let onSubmit = (event: FormEvent) => {
         event.preventDefault()
     }
 
@@ -50,23 +63,26 @@ const SignInPage = () => {
                     <SignInTable>
                         <tbody>
                         <tr>
-                            <td><label htmlFor="username">Username</label></td>
+                            <td><label htmlFor="username"><Typography>Username</Typography></label></td>
                             <td><Input type={"text"} required/></td>
                         </tr>
                         <tr>
-                            <td><label htmlFor="password">Password</label></td>
+                            <td><label htmlFor="password"><Typography>Password</Typography></label></td>
                             <td><Input type={"password"} required/></td>
                         </tr>
                         </tbody>
                     </SignInTable>
-                    <SignInButton type={"submit"}>Sign In</SignInButton>
+                    <StyledButton type={"submit"}>Sign In</StyledButton>
                 </FormStyled>
-                <SignInButton startIcon={<GoogleIcon/>}>Sign In With Google</SignInButton>
-                <SignInButton startIcon={<FacebookIcon/>}>Sign In With Facebook</SignInButton>
-                <CenteredColumn>
-                    <span><a href="#!">Click Here To Sign up</a></span>
-                    <span>Forgot Password ? <a href={"#!"}>Click Here</a></span>
-                </CenteredColumn>
+                <StyledButton startIcon={<GoogleIcon/>}>Sign In With Google</StyledButton>
+                <StyledButton startIcon={<FacebookIcon/>}>Sign In With Facebook</StyledButton>
+                <BottomCentered>
+                    <Typography variant={"subtitle2"}>
+                        <Link to={"/signup"} component={StyledLink}>Click Here To Sign up</Link>
+                    </Typography>
+                    <Typography variant={"caption"}>Forgot Password ? <Link to={"/forgot-password"}  component={StyledLink}>Click
+                        Here</Link></Typography>
+                </BottomCentered>
             </SignInBox>
         </CenteredColumn>
     )

@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import MainPage from "./pages/MainPage";
 import {createGlobalStyle} from "styled-components";
+import SignUpPage from "./pages/SignUpPage";
 
 interface AppProps {
 
@@ -16,10 +17,10 @@ interface AppState {
 }
 
 const GlobalStyles = createGlobalStyle`
-  html, body,#root {
+  html, body, #root {
     margin: 0;
     padding: 0;
-    height:100%;
+    height: 100%;
   }
 `
 
@@ -33,13 +34,19 @@ class App extends React.Component<AppProps, AppState> {
         return (
             <AppState.Provider value={{
                 signedIn: this.state.signedIn,
-                darkTheme:this.state.darkTheme
+                darkTheme: this.state.darkTheme
             }}>
-                <GlobalStyles />
+                <GlobalStyles/>
                 <Router>
                     <Switch>
                         <Route exact path={"/signin"}>
                             <SignInPage/>
+                        </Route>
+                        <Route exact path={"/signup"}>
+                            <SignUpPage/>
+                        </Route>
+                        <Route exact path={"forgot-password"}>
+
                         </Route>
                         <Route exact path={"/"}>
                             <MainPage/>
