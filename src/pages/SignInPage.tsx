@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import {Button, Input, Typography} from "@material-ui/core";
+import {Button, InputAdornment, TextField, Typography} from "@material-ui/core";
 import GoogleIcon from "../icons/GoogleIcon";
 import FacebookIcon from "../icons/FacebookIcon";
 import {FormEvent} from "react";
 import {Link} from "react-router-dom";
 import StyledLink from "@material-ui/core/Link";
+import {AccountCircle, AccountCircleOutlined, Lock, LockOutlined} from "@material-ui/icons";
 
 const CenteredColumn = styled.div`
   width: 100%;
@@ -18,19 +19,18 @@ const CenteredColumn = styled.div`
 const SignInBox = styled.div`
   background: rgba(0, 0, 0, .1);
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 2em;
   display: flex;
   flex-direction: column;
-`
-
-const SignInTable = styled.table`
-  margin-bottom: 1em;
 `
 
 const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
+`
 
+const StyledField = styled(TextField)`
+  margin-bottom: 1em !important;
 `
 
 const BottomCentered = styled.div`
@@ -43,10 +43,11 @@ const BottomCentered = styled.div`
 
 const StyledButton = styled(Button)`
   background-color: rgba(255, 255, 255, .5) !important;
-  margin:0.2em !important;
-  
-  &:hover{
-    background-color:rgba(255,255,255,.8) !important;
+  margin: 0.2em !important;
+  padding: 0.5em 2em !important;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, .8) !important;
   }
 `
 
@@ -60,18 +61,31 @@ const SignInPage = () => {
         <CenteredColumn>
             <SignInBox>
                 <FormStyled onSubmit={onSubmit}>
-                    <SignInTable>
-                        <tbody>
-                        <tr>
-                            <td><label htmlFor="username"><Typography>Username</Typography></label></td>
-                            <td><Input type={"text"} required/></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="password"><Typography>Password</Typography></label></td>
-                            <td><Input type={"password"} required/></td>
-                        </tr>
-                        </tbody>
-                    </SignInTable>
+                    <StyledField
+                        label={"Username"}
+                        variant="outlined"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountCircle />
+                                </InputAdornment>
+                            ),
+                        }}
+                        required
+                    />
+                    <StyledField
+                        label={"Password"}
+                        variant="outlined"
+                        type={"password"}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Lock />
+                                </InputAdornment>
+                            ),
+                        }}
+                        required
+                    />
                     <StyledButton type={"submit"}>Sign In</StyledButton>
                 </FormStyled>
                 <StyledButton startIcon={<GoogleIcon/>}>Sign In With Google</StyledButton>
@@ -80,7 +94,8 @@ const SignInPage = () => {
                     <Typography variant={"subtitle2"}>
                         <Link to={"/signup"} component={StyledLink}>Click Here To Sign up</Link>
                     </Typography>
-                    <Typography variant={"caption"}>Forgot Password ? <Link to={"/forgot-password"}  component={StyledLink}>Click
+                    <Typography variant={"caption"}>Forgot Password ? <Link to={"/forgot-password"}
+                                                                            component={StyledLink}>Click
                         Here</Link></Typography>
                 </BottomCentered>
             </SignInBox>
