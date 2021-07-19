@@ -64,10 +64,11 @@ const SignInPage = () => {
                     <StyledField
                         label={"Username"}
                         variant="outlined"
+                        name={"username"}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <AccountCircle />
+                                    <AccountCircle color={"primary"}/>
                                 </InputAdornment>
                             ),
                         }}
@@ -77,10 +78,11 @@ const SignInPage = () => {
                         label={"Password"}
                         variant="outlined"
                         type={"password"}
+                        name={"password"}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <Lock />
+                                    <Lock color={"primary"} />
                                 </InputAdornment>
                             ),
                         }}
